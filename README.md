@@ -3,6 +3,8 @@
 
 ```bash
 mvn deploy:deploy-file -DgroupId=com.xiaozhuzhu -DartifactId=xzz-repo -Dversion=1.0.1 -Dpackaging=jar -Dfile=xzz-repo/target/xzz-repo-1.0.1.jar -Durl=file://D:/sowftware/info/xiaozhuzhu-repo/xiaozhuzhu-repo-local -DrepositoryId=xiaozhuzhu-github
+
+mvn deploy:deploy-file -DgroupId=com.xiaozhuzhu -DartifactId=xzz-repo -Dversion=1.0.1 -Dpackaging=jar -Dfile=D:/sowftware/info/xiaozhuzhu-repo/xzz-repo/target/xzz-repo-1.0.1.jar -DgeneratePom=true -Durl=file://D:/sowftware/info/xiaozhuzhu-repo/xiaozhuzhu-repo-local -DrepositoryId=local
 ````
 
 #### 生成的目录结构
