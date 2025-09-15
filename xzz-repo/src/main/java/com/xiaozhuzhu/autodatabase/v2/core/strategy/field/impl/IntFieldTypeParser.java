@@ -1,0 +1,61 @@
+package com.xiaozhuzhu.autodatabase.v2.core.strategy.field.impl;
+
+
+import com.xiaozhuzhu.autodatabase.v2.core.entity.FieldDefinition;
+import com.xiaozhuzhu.autodatabase.v2.core.entity.FieldTypeDefinition;
+import com.xiaozhuzhu.autodatabase.v2.core.enums.field.FieldTypeEnum;
+import com.xiaozhuzhu.autodatabase.v2.core.strategy.field.FieldTypePaser;
+import com.xiaozhuzhu.autodatabase.v2.core.utils.StringUtils;
+
+/**
+ * @author xiaozhuzhu
+ * @version 1.0
+ * @Date 2025年01月15日17:45
+ * @description: int类型解析器
+ */
+public class IntFieldTypeParser implements FieldTypePaser {
+
+    /**
+     * int 类型解析
+     *
+     * @param fieldTypeDefinition 字段类型对象
+     * @param fieldTypeEnum       字段类型枚举
+     * @param fieldLength         字段类型长度
+     * @param tableName           表名
+     * @param fieldName           字段名
+     * @return 对应解析器
+     */
+    @Override
+    public FieldTypePaser parseFieldType(FieldTypeDefinition fieldTypeDefinition, FieldTypeEnum fieldTypeEnum, String fieldLength, String tableName, String fieldName) {
+        // 这种类型不需要设置长度
+        fieldTypeDefinition.setLength(-1);
+
+        return this;
+    }
+
+    /**
+     * int 类型 默认值解析
+     *
+     * @param field         字段对象
+     * @param fieldTypeEnum 字段类型枚举
+     * @param defaultValue  默认值字符串
+     * @param tableName     表名
+     * @param fieldName     字段名
+     */
+    @Override
+    public void parseDefaultValue(FieldDefinition field, FieldTypeEnum fieldTypeEnum, String defaultValue, String tableName, String fieldName) {
+        // 是否设置默认值
+        if (StringUtils.isEmpty(defaultValue)) {
+            return;
+        }
+
+        try {
+            // 校验是否是数字
+            Integer.parseInt(defaultValue);
+            field.setDefaultValue(defaultValue);
+        } catch (Exception e) {
+            throw new UnsupportedOperationException("无法识别的默认值存在于表:{" + tableName + "},字段:{" + fieldName + "}中");
+        }
+    }
+
+}
